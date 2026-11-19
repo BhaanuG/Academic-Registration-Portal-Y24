@@ -22,3 +22,5 @@ pnpm dev
 ```
 
 <!-- checkpoint-1: docs(readme): expand portal architecture and high-level system overview -->
+
+<!-- checkpoint-2: docs(workflow): document student course registration lifecycle and priority rules -->
