@@ -42,3 +42,5 @@ pnpm dev
 <!-- checkpoint-10: feat(offline): configure progressive service worker caching strategies for assets -->
 
 <!-- checkpoint-11: refactor(utils): centralize date formatting and academic term time helper functions -->
+
+<!-- checkpoint-12: style(tokens): formalize university typography scales and elevation shadow tokens -->
