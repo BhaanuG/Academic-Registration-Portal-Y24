@@ -19,7 +19,7 @@ const defaultTitle = "KLEF Academic Registration Portal"
 const title = makeSiteSettings.title ?? defaultTitle
 const description =
   makeSiteSettings.description ??
-  "Built with Next.js, Payload CMS, and Tailwind CSS"
+  "Built with Next.js and Tailwind CSS"
 const favicon = "/favicon.png"
 const socialImage = makeSiteSettings.openGraph?.image
 const googleAnalyticsId = sanitizeHtmlAttribute(

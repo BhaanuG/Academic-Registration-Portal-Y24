@@ -1,6 +1,6 @@
 # Academic Registration Portal
 
-Clean JavaScript-first implementation of the KLEF Academic Registration Portal built with Next.js App Router and Payload CMS.
+Clean JavaScript-first implementation of the KLEF Academic Registration Portal built with Next.js App Router.
 
 ## Architecture
 

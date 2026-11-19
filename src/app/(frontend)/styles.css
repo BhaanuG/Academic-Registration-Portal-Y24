@@ -3465,7 +3465,7 @@ dd {
   }
 }
 
-/* Next/Payload portal additions */
+/* Portal additions */
 :root { --font-sans: var(--font-inter), Inter, sans-serif; }
 body { font-family: var(--font-sans); }
 .portal-loading,.admin-loading{min-height:100vh;display:grid;place-content:center;text-align:center;background:#f5f7fb;color:#24344d;gap:14px}.portal-loading-mark{font-weight:900;letter-spacing:.24em;font-size:28px}.portal-loading p,.admin-loading{color:#6b7890}

@@ -20,8 +20,7 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@payload-config": ["./src/payload.config.js"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [

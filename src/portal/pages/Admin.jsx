@@ -274,15 +274,15 @@ export default function Admin() {
   };
 
   const save = async () => {
-    const payloadData = normalizeForm(form, fields[active]);
+    const formData = normalizeForm(form, fields[active]);
     const localKey = `klef-admin-${resource}`;
     let currentList = JSON.parse(localStorage.getItem(localKey) || "null") || records;
 
     if (editing === "new") {
-      const newRec = { id: `local-${Date.now()}`, ...payloadData, updatedAt: new Date().toISOString() };
+      const newRec = { id: `local-${Date.now()}`, ...formData, updatedAt: new Date().toISOString() };
       currentList = [newRec, ...currentList];
     } else {
-      const updatedRec = { ...editing, ...payloadData, updatedAt: new Date().toISOString() };
+      const updatedRec = { ...editing, ...formData, updatedAt: new Date().toISOString() };
       currentList = currentList.map((r) => (r.id === editing.id ? updatedRec : r));
     }
 
