@@ -70,3 +70,5 @@ pnpm dev
 <!-- checkpoint-24: feat(theme): add css custom properties support for dynamic high-contrast mode -->
 
 <!-- checkpoint-25: security(sanitize): sanitize user input query parameters across search filters -->
+
+<!-- checkpoint-26: perf(memo): optimize render cycle for large prerequisite trees and course lists -->
