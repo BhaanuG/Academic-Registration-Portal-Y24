@@ -50,3 +50,5 @@ pnpm dev
 <!-- checkpoint-14: fix(validation): harden email syntax check and student roll number regex pattern -->
 
 <!-- checkpoint-15: docs(contributing): define git branching conventions and pull request guidelines -->
+
+<!-- checkpoint-16: feat(seo): append structured json-ld schema and OpenGraph metadata configuration -->
