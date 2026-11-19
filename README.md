@@ -72,3 +72,5 @@ pnpm dev
 <!-- checkpoint-25: security(sanitize): sanitize user input query parameters across search filters -->
 
 <!-- checkpoint-26: perf(memo): optimize render cycle for large prerequisite trees and course lists -->
+
+<!-- checkpoint-27: docs(changelog): create changelog entry tracking y24 academic portal milestones -->
