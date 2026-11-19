@@ -58,3 +58,5 @@ pnpm dev
 <!-- checkpoint-18: perf(images): configure responsive image loading and webp formats for faculty avatars -->
 
 <!-- checkpoint-19: style(print): add dedicated print media stylesheets for student schedule exports -->
+
+<!-- checkpoint-20: feat(i18n): prepare internationalization dictionary scaffolding for academic terms -->
