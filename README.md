@@ -64,3 +64,5 @@ pnpm dev
 <!-- checkpoint-21: chore(scripts): introduce npm scripts for clean builds and automated typechecking -->
 
 <!-- checkpoint-22: refactor(errors): establish centralized error boundary logging and error fallback view -->
+
+<!-- checkpoint-23: docs(api): document restful endpoints and internal request payloads for registration -->
