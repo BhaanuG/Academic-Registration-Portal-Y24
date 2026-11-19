@@ -28,3 +28,5 @@ pnpm dev
 <!-- checkpoint-3: perf(bundle): configure bundle analyzer settings and production chunk splitting -->
 
 <!-- checkpoint-4: ci(lint): add strict eslint and typescript validation rules for pre-commit checks -->
+
+<!-- checkpoint-5: security(headers): introduce content security policy and secure http response headers -->
