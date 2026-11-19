@@ -38,3 +38,5 @@ pnpm dev
 <!-- checkpoint-8: feat(accessibility): improve aria labels and keyboard focus traps across dialogs -->
 
 <!-- checkpoint-9: test(units): introduce test harness setup and mock data structures for catalog -->
+
+<!-- checkpoint-10: feat(offline): configure progressive service worker caching strategies for assets -->
