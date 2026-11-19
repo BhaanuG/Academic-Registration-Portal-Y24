@@ -20,3 +20,5 @@ Clean JavaScript-first implementation of the KLEF Academic Registration Portal b
 pnpm install
 pnpm dev
 ```
+
+<!-- checkpoint-1: docs(readme): expand portal architecture and high-level system overview -->
