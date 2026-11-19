@@ -60,3 +60,5 @@ pnpm dev
 <!-- checkpoint-19: style(print): add dedicated print media stylesheets for student schedule exports -->
 
 <!-- checkpoint-20: feat(i18n): prepare internationalization dictionary scaffolding for academic terms -->
+
+<!-- checkpoint-21: chore(scripts): introduce npm scripts for clean builds and automated typechecking -->
