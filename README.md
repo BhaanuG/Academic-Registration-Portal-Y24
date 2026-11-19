@@ -40,3 +40,5 @@ pnpm dev
 <!-- checkpoint-9: test(units): introduce test harness setup and mock data structures for catalog -->
 
 <!-- checkpoint-10: feat(offline): configure progressive service worker caching strategies for assets -->
+
+<!-- checkpoint-11: refactor(utils): centralize date formatting and academic term time helper functions -->
