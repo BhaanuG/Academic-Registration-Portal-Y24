@@ -44,3 +44,5 @@ pnpm dev
 <!-- checkpoint-11: refactor(utils): centralize date formatting and academic term time helper functions -->
 
 <!-- checkpoint-12: style(tokens): formalize university typography scales and elevation shadow tokens -->
+
+<!-- checkpoint-13: feat(analytics): add telemetry wrapper for course search and filter interaction telemetry -->
