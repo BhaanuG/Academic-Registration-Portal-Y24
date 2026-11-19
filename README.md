@@ -52,3 +52,5 @@ pnpm dev
 <!-- checkpoint-15: docs(contributing): define git branching conventions and pull request guidelines -->
 
 <!-- checkpoint-16: feat(seo): append structured json-ld schema and OpenGraph metadata configuration -->
+
+<!-- checkpoint-17: refactor(navigation): decouple breadcrumb route mappings into shared lookup config -->
