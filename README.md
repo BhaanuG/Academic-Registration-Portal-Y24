@@ -66,3 +66,5 @@ pnpm dev
 <!-- checkpoint-22: refactor(errors): establish centralized error boundary logging and error fallback view -->
 
 <!-- checkpoint-23: docs(api): document restful endpoints and internal request payloads for registration -->
+
+<!-- checkpoint-24: feat(theme): add css custom properties support for dynamic high-contrast mode -->
