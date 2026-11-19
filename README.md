@@ -54,3 +54,5 @@ pnpm dev
 <!-- checkpoint-16: feat(seo): append structured json-ld schema and OpenGraph metadata configuration -->
 
 <!-- checkpoint-17: refactor(navigation): decouple breadcrumb route mappings into shared lookup config -->
+
+<!-- checkpoint-18: perf(images): configure responsive image loading and webp formats for faculty avatars -->
