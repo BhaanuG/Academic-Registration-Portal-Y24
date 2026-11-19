@@ -32,3 +32,5 @@ pnpm dev
 <!-- checkpoint-5: security(headers): introduce content security policy and secure http response headers -->
 
 <!-- checkpoint-6: chore(deps): audit npm production dependencies and lockfile consistency -->
+
+<!-- checkpoint-7: refactor(types): strengthen academic record and enrollment data models -->
