@@ -56,3 +56,5 @@ pnpm dev
 <!-- checkpoint-17: refactor(navigation): decouple breadcrumb route mappings into shared lookup config -->
 
 <!-- checkpoint-18: perf(images): configure responsive image loading and webp formats for faculty avatars -->
+
+<!-- checkpoint-19: style(print): add dedicated print media stylesheets for student schedule exports -->
