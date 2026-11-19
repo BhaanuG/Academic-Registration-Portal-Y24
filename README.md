@@ -48,3 +48,5 @@ pnpm dev
 <!-- checkpoint-13: feat(analytics): add telemetry wrapper for course search and filter interaction telemetry -->
 
 <!-- checkpoint-14: fix(validation): harden email syntax check and student roll number regex pattern -->
+
+<!-- checkpoint-15: docs(contributing): define git branching conventions and pull request guidelines -->
