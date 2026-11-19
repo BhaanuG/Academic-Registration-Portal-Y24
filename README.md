@@ -74,3 +74,5 @@ pnpm dev
 <!-- checkpoint-26: perf(memo): optimize render cycle for large prerequisite trees and course lists -->
 
 <!-- checkpoint-27: docs(changelog): create changelog entry tracking y24 academic portal milestones -->
+
+<!-- checkpoint-28: chore(release): finalize version 1.0.0 metadata and production deployment checklist -->
