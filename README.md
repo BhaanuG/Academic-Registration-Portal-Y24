@@ -36,3 +36,5 @@ pnpm dev
 <!-- checkpoint-7: refactor(types): strengthen academic record and enrollment data models -->
 
 <!-- checkpoint-8: feat(accessibility): improve aria labels and keyboard focus traps across dialogs -->
+
+<!-- checkpoint-9: test(units): introduce test harness setup and mock data structures for catalog -->
