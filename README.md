@@ -62,3 +62,5 @@ pnpm dev
 <!-- checkpoint-20: feat(i18n): prepare internationalization dictionary scaffolding for academic terms -->
 
 <!-- checkpoint-21: chore(scripts): introduce npm scripts for clean builds and automated typechecking -->
+
+<!-- checkpoint-22: refactor(errors): establish centralized error boundary logging and error fallback view -->
