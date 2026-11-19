@@ -68,3 +68,5 @@ pnpm dev
 <!-- checkpoint-23: docs(api): document restful endpoints and internal request payloads for registration -->
 
 <!-- checkpoint-24: feat(theme): add css custom properties support for dynamic high-contrast mode -->
+
+<!-- checkpoint-25: security(sanitize): sanitize user input query parameters across search filters -->
