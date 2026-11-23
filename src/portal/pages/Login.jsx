@@ -57,7 +57,7 @@ export default function Login() {
           </div>
           <div className="term-note">
             <span>Current registration period</span>
-            <strong>{isEvenSemester ? "Semester 6 · Even semester" : "Semester 5 · Odd semester"}</strong>
+            <strong>Semester 6 • Even semester</strong>
           </div>
         </section>
         <section className="login-panel">
