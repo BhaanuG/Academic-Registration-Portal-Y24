@@ -123,14 +123,14 @@
   flex-direction: column;
 }
 .login-page {
-  background: var(--institution-navy);
+  background: var(--wash);
 }
 .login-shell {
   min-height: calc(100vh - 55px);
   flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(430px, 0.85fr);
-  background: var(--paper);
+  background: var(--wash);
 }
 .login-context {
   min-height: calc(100vh - 55px);
@@ -216,7 +216,7 @@
   display: grid;
   place-items: center;
   padding: 48px;
-  background: var(--paper);
+  background: var(--wash);
 }
 .login-form-wrap {
   width: min(100%, 410px);
@@ -626,13 +626,14 @@ select:focus-visible {
   display: grid;
   place-items: center;
   padding: 30px;
-  background: var(--institution-navy);
+  background: var(--wash);
 }
 .password-card {
   width: min(100%, 520px);
   padding: 44px;
   background: var(--paper);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--line);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.08);
 }
 .password-card > .brand {
   margin-bottom: 42px;
@@ -657,7 +658,7 @@ select:focus-visible {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--institution-navy);
+  background: var(--wash);
 }
 .reset-screen {
   min-height: calc(100vh - 55px);
@@ -671,7 +672,9 @@ select:focus-visible {
   padding: clamp(28px, 5vw, 44px);
   border-top: 4px solid var(--green);
   background: var(--paper);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--green);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.08);
 }
 .reset-card > .brand {
   margin-bottom: 38px;
