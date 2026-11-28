@@ -759,6 +759,19 @@ function parseSqlValues(valuesStr) {
   return values;
 }
 
+function toTitleCase(str) {
+  if (!str) return '';
+  return str
+    .toLowerCase()
+    .split(' ')
+    .map(word => {
+      if (!word) return '';
+      // Retain abbreviations or special terms if needed
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+}
+
 function parseSqlStudent(sqlLine) {
   const openParen = sqlLine.indexOf('VALUES (');
   if (openParen === -1) return null;
@@ -770,17 +783,17 @@ function parseSqlStudent(sqlLine) {
     id: vals[0],
     username: vals[1],
     studentId: vals[1],
-    name: vals[2],
-    gender: vals[3],
+    name: toTitleCase(vals[2]),
+    gender: toTitleCase(vals[3]),
     department: vals[4],
     program: vals[5],
-    residencyStatus: vals[6],
-    specialization: vals[7],
+    residencyStatus: toTitleCase(vals[6]),
+    specialization: toTitleCase(vals[7]),
     year: vals[8],
-    universityEmail: vals[9],
-    personalEmail: vals[10],
+    universityEmail: vals[9].toLowerCase(),
+    personalEmail: vals[10].toLowerCase(),
     mobileNumber: vals[11],
-    parentName: vals[12],
+    parentName: toTitleCase(vals[12]),
     parentPhoneNumber: vals[13],
     dateOfBirth: vals[14],
     passwordHash: vals[15],
@@ -789,10 +802,10 @@ function parseSqlStudent(sqlLine) {
     aapaarNumber: 'APAAR-9876-5432',
     counselor: {
       employeeId: vals[17],
-      name: vals[18],
-      designation: vals[19],
+      name: toTitleCase(vals[18]),
+      designation: toTitleCase(vals[19]),
       mobileNumber: vals[20],
-      email: vals[21],
+      email: vals[21].toLowerCase(),
     },
   };
 }

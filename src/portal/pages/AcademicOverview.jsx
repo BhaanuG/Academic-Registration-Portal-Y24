@@ -4,19 +4,7 @@ import { findStudentById } from "../services/studentData";
 import { getStudentCluster } from "../services/studentService";
 import { buckets } from "../services/academicData";
 import { readLocalRecord } from "../services/api";
-import { loadPreferences } from "../services/preferenceService";
 import { getSelectionStorageKey, initialSelections } from "../services/subjectService";
-import {
-  BookOpen,
-  UserCheck,
-  CheckCircle2,
-  CalendarDays,
-  ShieldCheck,
-  Building,
-  GraduationCap,
-  Calendar,
-  Compass,
-} from "lucide-react";
 
 export default function Overview({ studentId, goTo }) {
   // Retrieve student record dynamically from database dataset
@@ -25,29 +13,28 @@ export default function Overview({ studentId, goTo }) {
       name: "Student",
       username: studentId || "2400030952",
       universityEmail: `${studentId}@kluniversity.in`,
-      department: "Computer Science & Engineering - 2",
-      specialization: "Generative AI & Multi-modal Intelligence",
+      department: "CSE - Computer Science & Engineering",
+      specialization: "Generative AI & Multi-Modal Intelligence",
       program: "Bachelor of Technology (B.Tech)",
-      yearOfStudy: "3rd Year",
-      cluster: "Cluster 2",
+      yearOfStudy: "Third Year",
+      cluster: "Cluster-1",
       counselor: {
         name: "Dr. S. Srinivasa Rao",
         employeeId: "KLEF0864",
-        designation: "Associate Professor",
-        mobileNumber: "9876541111",
-        email: "s.rao@kluniversity.in",
+        designation: "Faculty Counselor",
+        mobileNumber: "+91 998XX XX644",
+        email: "counselor@kluniversity.in",
       },
     };
   }, [studentId]);
 
   // Read actual student cluster state
-  const cluster = useMemo(() => getStudentCluster(studentId) || student.cluster || "Cluster 2", [studentId, student]);
+  const cluster = useMemo(() => getStudentCluster(studentId) || student.cluster || "Cluster-1", [studentId, student]);
   const selections = useMemo(() => {
     return readLocalRecord(getSelectionStorageKey(studentId), initialSelections);
   }, [studentId]);
-  const preferences = useMemo(() => loadPreferences(studentId), [studentId]);
 
-  // Compute actual progress metrics
+  // Compute curriculum stats
   const selectedSubjectsList = useMemo(() => {
     return buckets
       .map((b) => b.subjects.find((s) => s.code === selections[b.id]))
@@ -58,19 +45,9 @@ export default function Overview({ studentId, goTo }) {
     return selectedSubjectsList.reduce((sum, s) => sum + (s.credits || 0), 0);
   }, [selectedSubjectsList]);
 
-  const totalBuckets = buckets.length || 7;
-  const isSubjectSelectionComplete = selectedSubjectsList.length >= totalBuckets;
-
-  const rankedSubjectsCount = useMemo(() => {
-    const set = new Set();
-    Object.keys(preferences).forEach((key) => {
-      const separator = key.indexOf("-");
-      if (separator !== -1) {
-        set.add(key.slice(0, separator));
-      }
-    });
-    return set.size;
-  }, [preferences]);
+  const totalBuckets = buckets.length || 8;
+  const totalSubjects = buckets.reduce((acc, b) => acc + (b.subjects?.length || 0), 0) || 10;
+  const electivesPending = Math.max(0, totalBuckets - selectedSubjectsList.length);
 
   return (
     <div className="overview-container">
@@ -79,16 +56,13 @@ export default function Overview({ studentId, goTo }) {
         description="Official university profile, active cohort allocation, and academic registration progression status."
       />
 
-      {/* Main Content Layout Grid */}
+      {/* Top Split Section */}
       <div className="overview-grid">
-        {/* Left Column: Official Academic Credentials */}
+        {/* Left Column: Academic Enrollment Identity */}
         <div className="overview-main-col">
           <section className="plain-section academic-section">
             <div className="section-title">
-              <div>
-                <h2>Academic Enrollment Identity</h2>
-              </div>
-              <span className="read-only">Registrar Managed</span>
+              <h2>Academic Enrollment Identity</h2>
             </div>
 
             <dl className="data-grid academic-grid">
@@ -98,7 +72,7 @@ export default function Overview({ studentId, goTo }) {
               </div>
               <div>
                 <dt>University Roll Number</dt>
-                <dd className="font-mono">{student.username}</dd>
+                <dd className="font-semibold text-slate-900">{student.username}</dd>
               </div>
               <div>
                 <dt>Institutional Email</dt>
@@ -109,54 +83,71 @@ export default function Overview({ studentId, goTo }) {
                 </dd>
               </div>
               <div>
-                <dt>Department / Branch</dt>
-                <dd>{student.department || "Computer Science & Engineering - 2"}</dd>
+                <dt>Department / Program</dt>
+                <dd>CSE - Computer Science & Engineering</dd>
               </div>
               <div>
                 <dt>Academic Specialization</dt>
-                <dd className="text-blue-700 font-semibold">{student.specialization || "Generative AI & Multi-modal Intelligence"}</dd>
+                <dd>{student.specialization || "Generative AI & Multi-Modal Intelligence"}</dd>
               </div>
               <div>
-                <dt>Program &amp; Degree</dt>
-                <dd>{student.program || "Bachelor of Technology (B.Tech)"}</dd>
+                <dt>Cohort Cluster</dt>
+                <dd>{cluster.replace("Cluster ", "Cluster-")}</dd>
               </div>
               <div>
-                <dt>Academic Batch</dt>
-                <dd>2024–2028</dd>
+                <dt>Student Type / Track</dt>
+                <dd>CRT (CSE-2)</dd>
+              </div>
+              <div>
+                <dt>Placement Readiness Status</dt>
+                <dd className="text-emerald-700 font-semibold">Placed</dd>
+              </div>
+              <div>
+                <dt>Addon Degree Track</dt>
+                <dd>Specialization</dd>
               </div>
               <div>
                 <dt>Current Term Level</dt>
-                <dd>{student.yearOfStudy || "Third Year"} · Semester 6</dd>
+                <dd>Fourth Year · Semester 8 (2026–27 EVEN)</dd>
               </div>
             </dl>
           </section>
         </div>
 
-        {/* Right Column: Assigned Faculty Counselor Panel */}
+        {/* Right Column: Academic Counseling Panel */}
         <aside className="counselor-panel">
-          <p className="eyebrow">Academic Counseling</p>
-          <h2>{student.counselor?.name || "Dr. S. Srinivasa Rao"}</h2>
-          <dl>
+          <div className="counselor-header-block">
+            <p className="eyebrow text-blue-600 font-semibold text-xs tracking-wider uppercase mb-1">
+              Academic Counseling
+            </p>
+            <h2 className="text-lg font-serif font-bold text-slate-900">
+              {student.counselor?.name || "Faculty Counselor"}
+            </h2>
+          </div>
+
+          <dl className="counselor-grid">
             <div>
               <dt>Employee ID</dt>
-              <dd className="font-mono">{student.counselor?.employeeId || "KLEF0864"}</dd>
+              <dd className="font-semibold">{student.counselor?.employeeId || "6934"}</dd>
             </div>
             <div>
               <dt>Designation</dt>
-              <dd>{student.counselor?.designation || "Associate Professor"}</dd>
+              <dd>{student.counselor?.designation || "Faculty Counselor"}</dd>
             </div>
             <div>
-              <dt>Direct Contact</dt>
-              <dd>
-                <a href={`tel:${student.counselor?.mobileNumber || "9876541111"}`} className="text-blue-600 hover:underline">
-                  {student.counselor?.mobileNumber || "9876541111"}
-                </a>
+              <dt>Department</dt>
+              <dd>Computer Science & Engineering</dd>
+            </div>
+            <div>
+              <dt>Contact Mobile</dt>
+              <dd className="text-slate-800">
+                {student.counselor?.mobileNumber || "+91 998XX XX644"}
               </dd>
             </div>
             <div>
-              <dt>Counselor Email</dt>
+              <dt>Contact Email</dt>
               <dd>
-                <a href={`mailto:${student.counselor?.email || "counselor@kluniversity.in"}`} className="text-blue-600 hover:underline">
+                <a href={`mailto:${student.counselor?.email}`} className="text-blue-600 hover:underline">
                   {student.counselor?.email || "counselor@kluniversity.in"}
                 </a>
               </dd>
@@ -165,79 +156,35 @@ export default function Overview({ studentId, goTo }) {
         </aside>
       </div>
 
-      {/* Bottom Row: Active Progress Cards */}
-      <div className="overview-cards">
-        <article className="overview-card group hover:border-blue-400 transition-all shadow-sm">
-          <div className="card-top">
-            <span className="card-tag">Cohort Allocation</span>
-            <div className="card-icon-wrap bg-blue-50 text-blue-700">
-              <Compass size={20} />
-            </div>
-          </div>
-          <p className="cluster-label">Assigned Cluster</p>
-          <div className="cluster-val text-blue-900 font-bold tracking-tight">{cluster}</div>
-          <p className="cluster-desc text-slate-600">
-            Assigned scheduling cohort determining bucket priorities.
-          </p>
-          <button
-            type="button"
-            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
-            onClick={() => goTo("cluster")}
-          >
-            <span>Review Cohort</span>
-          </button>
-        </article>
+      {/* Bottom Section: Prescribed Curriculum Status */}
+      <section className="curriculum-status-section">
+        <div className="section-title">
+          <h2>Prescribed Curriculum Status</h2>
+        </div>
 
-        <article className="overview-card group hover:border-amber-400 transition-all shadow-sm">
-          <div className="card-top">
-            <span className="card-tag">Curriculum Election</span>
-            <div className="card-icon-wrap bg-amber-50 text-amber-700">
-              <BookOpen size={20} />
-            </div>
+        <div className="curriculum-metrics-grid">
+          <div className="metric-box">
+            <span className="metric-title">Curriculum Buckets</span>
+            <span className="metric-number text-blue-600">8</span>
           </div>
-          <p className="cluster-label">Total Credits Selected</p>
-          <div className="cluster-val text-amber-900 font-bold tracking-tight">
-            {selectedCredits} / 25
-          </div>
-          <p className="cluster-desc text-slate-600">
-            {isSubjectSelectionComplete
-              ? "All required buckets selected."
-              : `${selectedSubjectsList.length} of ${totalBuckets} curriculum buckets currently chosen.`}
-          </p>
-          <button
-            type="button"
-            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
-            onClick={() => goTo("subjects")}
-          >
-            <span>{isSubjectSelectionComplete ? "Modify Selections" : "Select Courses"}</span>
-          </button>
-        </article>
 
-        <article className="overview-card group hover:border-emerald-400 transition-all shadow-sm">
-          <div className="card-top">
-            <span className="card-tag">Faculty Priority</span>
-            <div className="card-icon-wrap bg-emerald-50 text-emerald-700">
-              <UserCheck size={20} />
-            </div>
+          <div className="metric-box">
+            <span className="metric-title">Total Subjects</span>
+            <span className="metric-number text-emerald-600">10</span>
           </div>
-          <p className="cluster-label">Preferences Recorded</p>
-          <div className="cluster-val text-emerald-900 font-bold tracking-tight">
-            {rankedSubjectsCount} / {totalBuckets}
+
+          <div className="metric-box">
+            <span className="metric-title">Prescribed Credits</span>
+            <span className="metric-number text-purple-600">30</span>
           </div>
-          <p className="cluster-desc text-slate-600">
-            {rankedSubjectsCount >= totalBuckets
-              ? "Faculty preferences recorded across subjects."
-              : "Rank your preferred faculty instructors."}
-          </p>
-          <button
-            type="button"
-            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
-            onClick={() => goTo("preferences")}
-          >
-            <span>{rankedSubjectsCount >= totalBuckets ? "Review Preferences" : "Record Preferences"}</span>
-          </button>
-        </article>
-      </div>
+
+          <div className="metric-box">
+            <span className="metric-title">Electives Pending</span>
+            <span className="metric-number text-amber-500">5</span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
