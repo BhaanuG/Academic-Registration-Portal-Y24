@@ -17,7 +17,7 @@ export default function ClusterSelection({ cluster, setCluster, goTo }) {
       id: "Cluster 2",
       name: "Cluster 2",
       range: "S51 — S100",
-      description: "Section range 51 through 100 aligned with your specialization cohort.",
+      description: "Section range 51 through 100 for enrolled CSE-2 students.",
       recommended: true,
     },
   ];
@@ -26,7 +26,7 @@ export default function ClusterSelection({ cluster, setCluster, goTo }) {
     <div className="cluster-selection-workspace">
       <PageHeading
         title="Cluster Selection"
-        description="Confirm the section cluster assigned to your specialization before choosing semester subjects."
+        description="Confirm your section cluster cohort allocation before choosing semester subjects."
         aside={
           <div className="status-stamp">
             <span>SELECTED COHORT</span>
@@ -34,13 +34,6 @@ export default function ClusterSelection({ cluster, setCluster, goTo }) {
           </div>
         }
       />
-
-      <section className="specialization-banner">
-        <span className="specialization-tag">
-          Your Specialization
-        </span>
-        <strong>Generative AI for Agentic and Multi-Modal Intelligence</strong>
-      </section>
 
       <div className="cluster-grid">
         {clusters.map((item) => {

@@ -87,8 +87,8 @@ export default function Overview({ studentId, goTo }) {
                 <dd>CSE - Computer Science & Engineering</dd>
               </div>
               <div>
-                <dt>Academic Specialization</dt>
-                <dd>{student.specialization || "Generative AI & Multi-Modal Intelligence"}</dd>
+                <dt>Gender</dt>
+                <dd>{student.gender || "Male"}</dd>
               </div>
               <div>
                 <dt>Cohort Cluster</dt>
@@ -97,14 +97,6 @@ export default function Overview({ studentId, goTo }) {
               <div>
                 <dt>Student Type / Track</dt>
                 <dd>CRT (CSE-2)</dd>
-              </div>
-              <div>
-                <dt>Gender</dt>
-                <dd>{student.gender || "Male"}</dd>
-              </div>
-              <div>
-                <dt>Addon Degree Track</dt>
-                <dd>Specialization</dd>
               </div>
               <div>
                 <dt>Current Term Level</dt>

@@ -182,11 +182,6 @@ export default function Profile({ studentId }) {
             </div>
 
             <div className="field-block">
-              <span className="field-label">Specialization</span>
-              <input disabled value={student.specialization || "Generative AI & Multi-modal Intelligence"} readOnly className="field-input readonly font-medium text-blue-800" />
-            </div>
-
-            <div className="field-block">
               <span className="field-label">Residential Status</span>
               <input disabled value={student.residencyStatus || "Day Scholar"} readOnly className="field-input readonly" />
             </div>
