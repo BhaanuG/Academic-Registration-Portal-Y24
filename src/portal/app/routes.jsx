@@ -17,13 +17,16 @@ import Admin from "../pages/Admin";
 import { loadPreferences, savePreferences } from "../services/preferenceService";
 import { buckets, faculty, initialSelections } from "../services/academicData";
 import { getStudentCluster, saveLastRoute, saveStudentCluster } from "../services/studentService";
-import { portalPath, segmentPages } from "../utils/routes";
+import { findStudentById } from "../services/studentData";
+import { portalPath, segmentPages, toTitleCase } from "../utils/routes";
 
 function PortalRoute() {
   const navigate = useNavigate();
-  const { studentId = "", studentName = "Anirudh-Varma", pageName = "" } = useParams();
+  const { studentId = "", studentName = "Student", pageName = "" } = useParams();
   const page = segmentPages[pageName] || "overview";
   const { studentId: authenticatedStudent, signOut } = useAuth();
+  const studentRecord = useMemo(() => findStudentById(studentId), [studentId]);
+  const currentStudentName = toTitleCase(studentRecord?.name || studentName || "Student");
   const { selections, setSelections } = useSubjects(studentId);
   const [preferences, setPreferences] = useState(() => loadPreferences(studentId));
   const [cluster, setCluster] = useState(() => getStudentCluster(studentId));
@@ -43,7 +46,8 @@ function PortalRoute() {
     if (authenticatedStudent === studentId) saveLastRoute(window.location.pathname);
   }, [authenticatedStudent, page, studentId]);
 
-  const setPage = (nextPage) => navigate(portalPath(studentId, studentName, nextPage));
+  const setPage = (nextPage) => navigate(portalPath(studentId, currentStudentName, nextPage));
+
   const content = useMemo(() => {
     if (page === "overview") return <AcademicOverview studentId={studentId} />;
     if (page === "cluster")
