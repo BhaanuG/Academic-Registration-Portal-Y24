@@ -88,7 +88,7 @@ export default function Overview({ studentId, goTo }) {
               </div>
               <div>
                 <dt>ACADEMIC SPECIALIZATION</dt>
-                <dd>{student.specialization && student.specialization.trim() ? student.specialization : "Data Science And Big Data Analytics"}</dd>
+                <dd>{student.specialization && student.specialization.trim() ? student.specialization : "—"}</dd>
               </div>
               <div>
                 <dt>COHORT CLUSTER</dt>
@@ -104,7 +104,7 @@ export default function Overview({ studentId, goTo }) {
               </div>
               <div>
                 <dt>ADDON DEGREE TRACK</dt>
-                <dd>Specialization</dd>
+                <dd>{student.specialization && student.specialization.trim() ? "Specialization" : "—"}</dd>
               </div>
               <div>
                 <dt>CURRENT TERM LEVEL</dt>
