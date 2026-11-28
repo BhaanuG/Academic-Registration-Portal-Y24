@@ -1,21 +1,17 @@
-import React, { useMemo } from "react";
+import { useState, useMemo } from "react";
 import PageHeading from "../components/common/PageHeading";
+import { findStudentById } from "../services/studentData";
 import { getStudentCluster } from "../services/studentService";
-import { loadPreferences } from "../services/preferenceService";
-import { readLocalRecord } from "../services/api";
-import { getSelectionStorageKey, initialSelections } from "../services/subjectService";
 import { buckets } from "../services/academicData";
+import { readLocalRecord } from "../services/api";
+import { loadPreferences } from "../services/preferenceService";
+import { getSelectionStorageKey, initialSelections } from "../services/subjectService";
 import {
-  CheckCircle2,
-  Clock,
   BookOpen,
-  Layers,
-  Award,
-  Sparkles,
   UserCheck,
-  ArrowRight,
-  Shield,
-  FileCheck,
+  CheckCircle2,
+  CalendarDays,
+  ShieldCheck,
   Building,
   GraduationCap,
   Calendar,
@@ -23,8 +19,29 @@ import {
 } from "lucide-react";
 
 export default function Overview({ studentId, goTo }) {
-  // Read actual student state
-  const cluster = useMemo(() => getStudentCluster(studentId) || "Cluster 2", [studentId]);
+  // Retrieve student record dynamically from database dataset
+  const student = useMemo(() => {
+    return findStudentById(studentId) || {
+      name: "Student",
+      username: studentId || "2400030952",
+      universityEmail: `${studentId}@kluniversity.in`,
+      department: "Computer Science & Engineering - 2",
+      specialization: "Generative AI & Multi-modal Intelligence",
+      program: "Bachelor of Technology (B.Tech)",
+      yearOfStudy: "3rd Year",
+      cluster: "Cluster 2",
+      counselor: {
+        name: "Dr. S. Srinivasa Rao",
+        employeeId: "KLEF0864",
+        designation: "Associate Professor",
+        mobileNumber: "9876541111",
+        email: "s.rao@kluniversity.in",
+      },
+    };
+  }, [studentId]);
+
+  // Read actual student cluster state
+  const cluster = useMemo(() => getStudentCluster(studentId) || student.cluster || "Cluster 2", [studentId, student]);
   const selections = useMemo(() => {
     return readLocalRecord(getSelectionStorageKey(studentId), initialSelections);
   }, [studentId]);
@@ -77,31 +94,31 @@ export default function Overview({ studentId, goTo }) {
             <dl className="data-grid academic-grid">
               <div>
                 <dt>Student Name</dt>
-                <dd>Anirudh Varma</dd>
+                <dd>{student.name}</dd>
               </div>
               <div>
                 <dt>University Roll Number</dt>
-                <dd className="font-mono">{studentId}</dd>
+                <dd className="font-mono">{student.username}</dd>
               </div>
               <div>
                 <dt>Institutional Email</dt>
                 <dd>
-                  <a href={`mailto:${studentId}@kluniversity.in`} className="text-blue-600 hover:underline">
-                    {studentId}@kluniversity.in
+                  <a href={`mailto:${student.universityEmail}`} className="text-blue-600 hover:underline">
+                    {student.universityEmail}
                   </a>
                 </dd>
               </div>
               <div>
                 <dt>Department / Branch</dt>
-                <dd>Computer Science &amp; Engineering - 2</dd>
+                <dd>{student.department || "Computer Science & Engineering - 2"}</dd>
               </div>
               <div>
                 <dt>Academic Specialization</dt>
-                <dd className="text-blue-700 font-semibold">Generative AI &amp; Multi-modal Intelligence</dd>
+                <dd className="text-blue-700 font-semibold">{student.specialization || "Generative AI & Multi-modal Intelligence"}</dd>
               </div>
               <div>
                 <dt>Program &amp; Degree</dt>
-                <dd>Bachelor of Technology (B.Tech)</dd>
+                <dd>{student.program || "Bachelor of Technology (B.Tech)"}</dd>
               </div>
               <div>
                 <dt>Academic Batch</dt>
@@ -109,7 +126,7 @@ export default function Overview({ studentId, goTo }) {
               </div>
               <div>
                 <dt>Current Term Level</dt>
-                <dd>Third Year · Semester 5</dd>
+                <dd>{student.yearOfStudy || "Third Year"} · Semester 6</dd>
               </div>
             </dl>
           </section>
@@ -118,30 +135,108 @@ export default function Overview({ studentId, goTo }) {
         {/* Right Column: Assigned Faculty Counselor Panel */}
         <aside className="counselor-panel">
           <p className="eyebrow">Academic Counseling</p>
-          <h2>Dr. S. Srinivasa Rao</h2>
+          <h2>{student.counselor?.name || "Dr. S. Srinivasa Rao"}</h2>
           <dl>
             <div>
               <dt>Employee ID</dt>
-              <dd className="font-mono">KLEF0864</dd>
+              <dd className="font-mono">{student.counselor?.employeeId || "KLEF0864"}</dd>
             </div>
             <div>
               <dt>Designation</dt>
-              <dd>Associate Professor</dd>
+              <dd>{student.counselor?.designation || "Associate Professor"}</dd>
             </div>
             <div>
-              <dt>Department</dt>
-              <dd>Computer Science &amp; Engineering</dd>
-            </div>
-            <div>
-              <dt>Contact Email</dt>
+              <dt>Direct Contact</dt>
               <dd>
-                <a href="mailto:s.rao@kluniversity.in" className="text-blue-600 hover:underline">
-                  s.rao@kluniversity.in
+                <a href={`tel:${student.counselor?.mobileNumber || "9876541111"}`} className="text-blue-600 hover:underline">
+                  {student.counselor?.mobileNumber || "9876541111"}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt>Counselor Email</dt>
+              <dd>
+                <a href={`mailto:${student.counselor?.email || "counselor@kluniversity.in"}`} className="text-blue-600 hover:underline">
+                  {student.counselor?.email || "counselor@kluniversity.in"}
                 </a>
               </dd>
             </div>
           </dl>
         </aside>
+      </div>
+
+      {/* Bottom Row: Active Progress Cards */}
+      <div className="overview-cards">
+        <article className="overview-card group hover:border-blue-400 transition-all shadow-sm">
+          <div className="card-top">
+            <span className="card-tag">Cohort Allocation</span>
+            <div className="card-icon-wrap bg-blue-50 text-blue-700">
+              <Compass size={20} />
+            </div>
+          </div>
+          <p className="cluster-label">Assigned Cluster</p>
+          <div className="cluster-val text-blue-900 font-bold tracking-tight">{cluster}</div>
+          <p className="cluster-desc text-slate-600">
+            Assigned scheduling cohort determining bucket priorities.
+          </p>
+          <button
+            type="button"
+            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
+            onClick={() => goTo("cluster")}
+          >
+            <span>Review Cohort</span>
+          </button>
+        </article>
+
+        <article className="overview-card group hover:border-amber-400 transition-all shadow-sm">
+          <div className="card-top">
+            <span className="card-tag">Curriculum Election</span>
+            <div className="card-icon-wrap bg-amber-50 text-amber-700">
+              <BookOpen size={20} />
+            </div>
+          </div>
+          <p className="cluster-label">Total Credits Selected</p>
+          <div className="cluster-val text-amber-900 font-bold tracking-tight">
+            {selectedCredits} / 25
+          </div>
+          <p className="cluster-desc text-slate-600">
+            {isSubjectSelectionComplete
+              ? "All required buckets selected."
+              : `${selectedSubjectsList.length} of ${totalBuckets} curriculum buckets currently chosen.`}
+          </p>
+          <button
+            type="button"
+            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
+            onClick={() => goTo("subjects")}
+          >
+            <span>{isSubjectSelectionComplete ? "Modify Selections" : "Select Courses"}</span>
+          </button>
+        </article>
+
+        <article className="overview-card group hover:border-emerald-400 transition-all shadow-sm">
+          <div className="card-top">
+            <span className="card-tag">Faculty Priority</span>
+            <div className="card-icon-wrap bg-emerald-50 text-emerald-700">
+              <UserCheck size={20} />
+            </div>
+          </div>
+          <p className="cluster-label">Preferences Recorded</p>
+          <div className="cluster-val text-emerald-900 font-bold tracking-tight">
+            {rankedSubjectsCount} / {totalBuckets}
+          </div>
+          <p className="cluster-desc text-slate-600">
+            {rankedSubjectsCount >= totalBuckets
+              ? "Faculty preferences recorded across subjects."
+              : "Rank your preferred faculty instructors."}
+          </p>
+          <button
+            type="button"
+            className="secondary-btn w-full mt-4 flex items-center justify-center gap-1.5"
+            onClick={() => goTo("preferences")}
+          >
+            <span>{rankedSubjectsCount >= totalBuckets ? "Review Preferences" : "Record Preferences"}</span>
+          </button>
+        </article>
       </div>
     </div>
   );

@@ -1,48 +1,58 @@
-import { useEffect, useState } from "react";
-import DatePicker from "../components/common/DatePicker";
+import { useEffect, useState, useMemo } from "react";
 import PageHeading from "../components/common/PageHeading";
 import PasswordInput from "../components/common/PasswordInput";
 import { passwordsMatch } from "../utils/validation";
+import { findStudentById } from "../services/studentData";
 import {
   setStudentCustomPassword,
-  getStudentCustomPassword,
-  getStudentDateOfBirth,
+  getStudentCustomPasswordHash,
+  verifyStudentCredential,
   DEFAULT_STUDENT_DOB,
 } from "../services/authService";
-import { Check, CheckCircle2, Lock, Shield, User, KeyRound, AlertCircle, Edit3 } from "lucide-react";
+import { CheckCircle2, User, KeyRound, AlertCircle, Edit3 } from "lucide-react";
 
 export default function Profile({ studentId }) {
   const [editing, setEditing] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState({
-    name: "Anirudh Varma",
-    rollNumber: studentId || "2400030952",
-    department: "Computer Science & Engineering",
-    specialization: "Generative AI & Multi-modal Intelligence",
-    batch: "2024-2028",
-    term: "Third Year · Semester 5",
-    gender: "Male",
-    dateOfBirth: "2007-01-01",
-    aadhaarNumber: "1234 5678 9012",
-    apaarNumber: "APAAR-9876-5432",
-    residencyStatus: "Hosteler",
-    parentName: "K. R. Varma",
-    parentPhoneNumber: "+91 98765 00000",
-  });
-  const [email] = useState(`${studentId}@kluniversity.in`);
-  const [personalEmail, setPersonalEmail] = useState("anirudh.varma@gmail.com");
-  const [mobile, setMobile] = useState("+91 98765 43210");
+
+  // Load registered student information from data service
+  const student = useMemo(() => {
+    return findStudentById(studentId) || {
+      name: "Student",
+      username: studentId || "2400030952",
+      department: "Computer Science & Engineering",
+      specialization: "Generative AI & Multi-modal Intelligence",
+      batch: "2024-2028",
+      yearOfStudy: "3rd Year",
+      gender: "Male",
+      dateOfBirth: DEFAULT_STUDENT_DOB,
+      aadhaarNumber: "—",
+      apaarNumber: "—",
+      residencyStatus: "Day Scholar",
+      parentName: "—",
+      parentPhoneNumber: "—",
+      universityEmail: `${studentId}@kluniversity.in`,
+      personalEmail: `${studentId}@gmail.com`,
+      mobileNumber: "—",
+    };
+  }, [studentId]);
+
+  const [personalEmail, setPersonalEmail] = useState(student.personalEmail || `${studentId}@gmail.com`);
+  const [mobile, setMobile] = useState(student.mobileNumber || "");
   const [passwordMessage, setPasswordMessage] = useState("");
   const [passwordStatus, setPasswordStatus] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [currentDob, setCurrentDob] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  useEffect(() => {
+    if (student.personalEmail) setPersonalEmail(student.personalEmail);
+    if (student.mobileNumber) setMobile(student.mobileNumber);
+  }, [student]);
+
   const save = async () => {
     setLoading(true);
-    // Pure frontend state update for demonstration
     setTimeout(() => {
       setLoading(false);
       setEditing(false);
@@ -105,12 +115,12 @@ export default function Profile({ studentId }) {
           <div className="profile-fields-grid">
             <div className="field-block">
               <span className="field-label">Full Name</span>
-              <input disabled value={profile?.name || "Student"} readOnly className="field-input readonly" />
+              <input disabled value={student.name} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
               <span className="field-label">Student ID</span>
-              <input disabled value={studentId} readOnly className="field-input readonly" />
+              <input disabled value={student.username} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
@@ -118,13 +128,13 @@ export default function Profile({ studentId }) {
               <input
                 disabled
                 value={
-                  profile?.dateOfBirth
-                    ? new Date(profile.dateOfBirth).toLocaleDateString("en-GB", {
+                  student.dateOfBirth
+                    ? new Date(student.dateOfBirth).toLocaleDateString("en-GB", {
                         day: "2-digit",
                         month: "long",
                         year: "numeric",
                       })
-                    : "—"
+                    : "01 January 2007"
                 }
                 readOnly
                 className="field-input readonly"
@@ -134,7 +144,7 @@ export default function Profile({ studentId }) {
 
             <div className="field-block">
               <span className="field-label">University Email</span>
-              <input disabled value={profile?.universityEmail || email} readOnly className="field-input readonly" />
+              <input disabled value={student.universityEmail} readOnly className="field-input readonly" />
             </div>
 
             <div className={`field-block ${editing ? "editable-highlight" : ""}`}>
@@ -163,32 +173,32 @@ export default function Profile({ studentId }) {
 
             <div className="field-block">
               <span className="field-label">Gender</span>
-              <input disabled value={profile?.gender || "—"} readOnly className="field-input readonly" />
+              <input disabled value={student.gender || "—"} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
-              <span className="field-label">Aadhaar Number</span>
-              <input disabled value={profile?.aadhaarNumber || "—"} readOnly className="field-input readonly" />
+              <span className="field-label">Department</span>
+              <input disabled value={student.department || "CSE-2"} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
-              <span className="field-label">APAAR Number</span>
-              <input disabled value={profile?.aapaarNumber || "—"} readOnly className="field-input readonly" />
+              <span className="field-label">Specialization</span>
+              <input disabled value={student.specialization || "Generative AI & Multi-modal Intelligence"} readOnly className="field-input readonly font-medium text-blue-800" />
             </div>
 
             <div className="field-block">
               <span className="field-label">Residential Status</span>
-              <input disabled value={profile?.residencyStatus || "—"} readOnly className="field-input readonly" />
+              <input disabled value={student.residencyStatus || "Day Scholar"} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
               <span className="field-label">Parent / Guardian Name</span>
-              <input disabled value={profile?.parentName || "—"} readOnly className="field-input readonly" />
+              <input disabled value={student.parentName || "—"} readOnly className="field-input readonly" />
             </div>
 
             <div className="field-block">
               <span className="field-label">Parent Contact Number</span>
-              <input disabled value={profile?.parentPhoneNumber || "—"} readOnly className="field-input readonly" />
+              <input disabled value={student.parentPhoneNumber || "—"} readOnly className="field-input readonly" />
             </div>
           </div>
         </section>
@@ -214,17 +224,17 @@ export default function Profile({ studentId }) {
               className="security-form"
               onSubmit={async (e) => {
                 e.preventDefault();
-                const existingPwd = getStudentCustomPassword(studentId);
-                const defaultDob = getStudentDateOfBirth(studentId) || DEFAULT_STUDENT_DOB;
+                const hasCustom = Boolean(getStudentCustomPasswordHash(studentId));
                 
-                // Validate current password (accept either previous custom password or registered DOB)
-                if (existingPwd && currentPassword !== existingPwd) {
+                // Cryptographically verify current credential (hash check)
+                const isValid = await verifyStudentCredential(studentId, currentPassword, hasCustom);
+                if (!isValid) {
                   setPasswordStatus("error");
-                  setPasswordMessage("Current password entered is incorrect.");
-                  return;
-                } else if (!existingPwd && currentPassword !== defaultDob && currentPassword !== "2007-01-01" && currentPassword !== "01-01-2007") {
-                  setPasswordStatus("error");
-                  setPasswordMessage("Current credential does not match your registered Date of Birth.");
+                  setPasswordMessage(
+                    hasCustom
+                      ? "Current password entered is incorrect."
+                      : "Current credential does not match your registered Date of Birth (YYYY-MM-DD)."
+                  );
                   return;
                 }
 
@@ -240,16 +250,15 @@ export default function Profile({ studentId }) {
                   return;
                 }
 
-                // Save custom password to persistent storage
-                setStudentCustomPassword(studentId, newPassword);
+                // Store hashed password securely
+                await setStudentCustomPassword(studentId, newPassword);
 
                 setCurrentPassword("");
-                setCurrentDob("");
                 setNewPassword("");
                 setConfirmPassword("");
                 setPasswordStatus("success");
                 setPasswordMessage(
-                  "Password updated successfully! Next time you sign in, you can enter your new password directly.",
+                  "Password updated successfully! It has been hashed and stored. You can use it on your next login.",
                 );
               }}
             >

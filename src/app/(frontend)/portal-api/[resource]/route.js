@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getPortalUser } from '@/lib/portal-auth'
 import { faculty, buckets } from '@/portal/services/academicData'
+import { findStudentById, getAllStudents } from '@/portal/services/studentData'
 
 const allowedResources = new Set(['students', 'faculty', 'buckets', 'courses', 'preferences'])
 
@@ -21,31 +22,27 @@ export async function GET(_request, { params }) {
   if (!ctx.user) return responseError('Sign in required.', 401)
 
   if (ctx.resource === 'students') {
-    const studentDoc = {
-      id: 'student-2400030952',
-      name: 'Anirudh Varma',
-      username: '2400030952',
-      dateOfBirth: '2005-04-18',
-      universityEmail: '2400030952@kluniversity.in',
-      personalEmail: 'anirudh.varma@gmail.com',
-      mobileNumber: '+91 98765 43210',
-      gender: 'Male',
-      aadhaarNumber: '1234 5678 9012',
-      aapaarNumber: 'APAAR-9876-5432',
-      residencyStatus: 'Hosteler',
-      parentName: 'K. R. Varma',
-      parentPhoneNumber: '+91 98765 00000',
-      cluster: 'Cluster 2',
-      counselor: {
-        name: 'Dr. S. Srinivasa Rao',
-        employeeId: 'KLEF0864',
-        designation: 'Associate Professor',
-        mobileNumber: '9876541111',
-        email: 's.rao@kluniversity.in',
-      },
-      updatedAt: new Date().toISOString(),
+    if (ctx.user.role === 'admin') {
+      const allStudents = getAllStudents().map((s) => ({
+        id: `student-${s.username}`,
+        ...s,
+        updatedAt: new Date().toISOString(),
+      }))
+      return NextResponse.json({ ok: true, docs: allStudents })
     }
-    return NextResponse.json({ ok: true, docs: [studentDoc] })
+
+    const student = findStudentById(ctx.user.username)
+    if (student) {
+      return NextResponse.json({
+        ok: true,
+        docs: [{
+          id: `student-${student.username}`,
+          ...student,
+          updatedAt: new Date().toISOString(),
+        }],
+      })
+    }
+    return NextResponse.json({ ok: true, docs: [] })
   }
 
   if (ctx.resource === 'faculty') {

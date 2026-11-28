@@ -23,6 +23,7 @@ import CoursesPage from "./admin/CoursesPage";
 import AdminProfilePage from "./admin/AdminProfilePage";
 import AdminResetPasswordPage from "./admin/ResetPasswordPage";
 import RecordModal from "./admin/RecordModal";
+import { getAllStudents } from "../services/studentData";
 import {
   adminNavigation,
   resources,
@@ -82,32 +83,7 @@ export default function Admin() {
       } else {
         let initial = [];
         if (resource === "students") {
-          initial = [
-            {
-              id: "student-1",
-              name: "Anirudh Varma",
-              username: "2400030952",
-              dateOfBirth: "2007-01-01",
-              universityEmail: "2400030952@kluniversity.in",
-              personalEmail: "anirudh.varma@gmail.com",
-              mobileNumber: "9876543210",
-              gender: "Male",
-              aadhaarNumber: "1234 5678 9012",
-              aapaarNumber: "APAAR-9876-5432",
-              residencyStatus: "Hosteler",
-              parentName: "K. R. Varma",
-              parentPhoneNumber: "9876500000",
-              cluster: "Cluster 2",
-              counselor: {
-                name: "Dr. Arvind Rao",
-                employeeId: "KLEF1184",
-                designation: "Associate Professor",
-                mobileNumber: "9876541111",
-                email: "arvind.rao@kluniversity.in",
-              },
-              updatedAt: new Date().toISOString(),
-            },
-          ];
+          initial = getAllStudents();
         } else if (resource === "faculty") {
           const { faculty: defaultFaculty } = require("../services/academicData");
           initial = defaultFaculty.map((f, i) => ({
@@ -194,13 +170,7 @@ export default function Admin() {
       const { faculty: defaultFaculty, buckets: defaultBuckets } = require("../services/academicData");
 
       setSummary({
-        students: getFallback("students", [
-          {
-            id: "student-1",
-            name: "Anirudh Varma",
-            username: "2400030952",
-          },
-        ]),
+        students: getFallback("students", getAllStudents()),
         faculty: getFallback("faculty", defaultFaculty),
         buckets: getFallback("buckets", defaultBuckets),
         courses: getFallback("courses", defaultBuckets.flatMap((b) => b.subjects)),

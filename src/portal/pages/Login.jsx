@@ -9,10 +9,12 @@ import {
   createSession,
   rememberDateOfBirth,
   hasCustomPassword,
-  getStudentCustomPassword,
-  getStudentDateOfBirth,
+  verifyAdminPassword,
+  verifyStudentCredential,
+  isAdministratorId,
   DEFAULT_STUDENT_DOB,
 } from "../services/authService";
+import { findStudentById } from "../services/studentData";
 import { portalPath } from "../utils/routes";
 import { isValidStudentId } from "../utils/validation";
 
@@ -25,15 +27,15 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const isFull10Digits = studentId.length === 10;
-  const isAdmin = isFull10Digits && studentId === "8897337687";
+  const isAdmin = isFull10Digits && isAdministratorId(studentId);
   const studentHasCustomPassword = useMemo(() => {
     if (!isFull10Digits || isAdmin) return false;
     return hasCustomPassword(studentId);
   }, [studentId, isFull10Digits, isAdmin]);
 
-  // Determine credential input mode dynamically
-  // 1. Admin ID: text password
-  // 2. Student ID with changed custom password: text password
+  // Determine credential input mode dynamically:
+  // 1. Admin ID: password field
+  // 2. Student ID with changed custom password: password field
   // 3. Student ID with default credentials: DOB calendar picker
   const requiresPassword = isAdmin || studentHasCustomPassword;
 
@@ -45,7 +47,8 @@ export default function Login() {
 
     if (isAdmin) {
       if (!password) return setError("Enter the administrator password.");
-      if (password !== "Janu@143") return setError("The administrator password entered is incorrect.");
+      const isCorrect = await verifyAdminPassword(password);
+      if (!isCorrect) return setError("The administrator password entered is incorrect.");
 
       setError("");
       createSession(studentId, "admin");
@@ -54,19 +57,24 @@ export default function Login() {
       return;
     }
 
-    // Student Authentication
+    // Student Authentication via secure cryptographic hash
+    const foundStudent = findStudentById(studentId);
+    if (!foundStudent) {
+      return setError("Student ID not found in enrolled records. Please verify your ID.");
+    }
+
     if (studentHasCustomPassword) {
       if (!password) return setError("Enter your account password.");
-      const savedPwd = getStudentCustomPassword(studentId);
-      if (password !== savedPwd) {
-        return setError("Incorrect password. Please enter the password you configured in your profile.");
+      const valid = await verifyStudentCredential(studentId, password, true);
+      if (!valid) {
+        return setError("Incorrect password. Please enter the password configured in your profile.");
       }
     } else {
       if (!dateOfBirth) {
         return setError("Select your date of birth using the calendar.");
       }
-      const registeredDob = getStudentDateOfBirth(studentId) || DEFAULT_STUDENT_DOB;
-      if (dateOfBirth !== registeredDob) {
+      const valid = await verifyStudentCredential(studentId, dateOfBirth, false);
+      if (!valid) {
         return setError(
           "The entered Date of Birth does not match university records (Default: 01 Jan 2007)."
         );
@@ -75,10 +83,10 @@ export default function Login() {
 
     setError("");
     createSession(studentId, "student");
-    const demoStudentName = "Student-Profile";
+    const formattedRouteName = (foundStudent.name || "Student").trim().replace(/\s+/g, "-");
     if (dateOfBirth) rememberDateOfBirth(studentId, dateOfBirth);
     signIn(studentId);
-    navigate(portalPath(studentId, demoStudentName, "overview"));
+    navigate(portalPath(studentId, formattedRouteName, "overview"));
   };
 
   return (
