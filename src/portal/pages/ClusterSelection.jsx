@@ -35,6 +35,13 @@ export default function ClusterSelection({ cluster, setCluster, goTo }) {
         }
       />
 
+      <section className="specialization-banner">
+        <span className="specialization-tag">
+          Your Specialization
+        </span>
+        <strong>Generative AI for Agentic and Multi-Modal Intelligence</strong>
+      </section>
+
       <div className="cluster-grid">
         {clusters.map((item) => {
           const selected = pending === item.name;
