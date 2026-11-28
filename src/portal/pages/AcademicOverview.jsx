@@ -83,7 +83,7 @@ export default function Overview({ studentId, goTo }) {
                 </dd>
               </div>
               <div>
-                <dt>Department / Program</dt>
+                <dt>Department</dt>
                 <dd>CSE - Computer Science & Engineering</dd>
               </div>
               <div>
@@ -99,8 +99,8 @@ export default function Overview({ studentId, goTo }) {
                 <dd>CRT (CSE-2)</dd>
               </div>
               <div>
-                <dt>Placement Readiness Status</dt>
-                <dd className="text-emerald-700 font-semibold">Placed</dd>
+                <dt>Gender</dt>
+                <dd>{student.gender || "Male"}</dd>
               </div>
               <div>
                 <dt>Addon Degree Track</dt>
@@ -108,7 +108,7 @@ export default function Overview({ studentId, goTo }) {
               </div>
               <div>
                 <dt>Current Term Level</dt>
-                <dd>Fourth Year · Semester 8 (2026–27 EVEN)</dd>
+                <dd>Third Year · Semester 6 (2026–27 EVEN)</dd>
               </div>
             </dl>
           </section>
