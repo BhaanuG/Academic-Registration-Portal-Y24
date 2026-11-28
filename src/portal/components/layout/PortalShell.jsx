@@ -62,7 +62,7 @@ export default function PortalShell({ page, setPage, onLogout, studentId, childr
                 <GraduationCap size={15} />
               </div>
               <div className="account-info-text">
-                <span className="account-role-label">Enrolled Student</span>
+                <span className="account-role-label">Registration No</span>
                 <strong className="account-id-label">{studentId}</strong>
               </div>
             </div>
