@@ -94,34 +94,37 @@
 .academic-grid {
   display: grid !important;
   grid-template-columns: repeat(2, 1fr) !important;
-  column-gap: 28px !important;
-  row-gap: 8px !important;
+  column-gap: 32px !important;
+  row-gap: 0px !important;
 }
 
 .academic-grid > div {
-  padding: 4px 0 6px 0 !important;
+  min-height: 0 !important;
+  padding: 6px 0 8px 0 !important;
   border-bottom: 1px solid #f1f5f9 !important;
   display: flex !important;
   flex-direction: column !important;
+  justify-content: center !important;
 }
 
 .academic-grid dt,
 .counselor-grid dt {
   font-size: 10px !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.05em !important;
   color: #64748b !important;
   font-weight: 700 !important;
-  margin-bottom: 2px !important;
+  margin: 0 0 2px 0 !important;
+  line-height: 1.1 !important;
 }
 
 .academic-grid dd,
 .counselor-grid dd {
-  font-size: 13px !important;
+  font-size: 13.5px !important;
   color: #0f172a !important;
   font-weight: 500 !important;
   margin: 0 !important;
-  line-height: 1.3 !important;
+  line-height: 1.25 !important;
 }
 
 .counselor-panel {
@@ -153,15 +156,17 @@
 .counselor-grid {
   display: flex !important;
   flex-direction: column !important;
-  gap: 8px !important;
+  gap: 0px !important;
 }
 
 .counselor-grid > div {
-  padding: 4px 0 6px 0 !important;
+  padding: 6px 0 8px 0 !important;
   border-bottom: 1px solid #f1f5f9 !important;
   display: flex !important;
   flex-direction: column !important;
+  justify-content: center !important;
 }
+
 
 
 /* Prescribed Curriculum Status Section */
