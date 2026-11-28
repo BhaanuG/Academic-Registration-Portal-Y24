@@ -35,23 +35,24 @@
 
 .overview-container .page-heading {
   flex: 0 0 auto !important;
-  margin-bottom: 12px !important;
-  padding-bottom: 8px !important;
-  border-bottom: 1px solid #ebdcc5 !important;
+  margin-top: 6px !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 0px !important;
+  border-bottom: none !important;
 }
 
 .overview-container .page-heading h1 {
-  font-size: 22px !important;
+  font-size: 24px !important;
   font-weight: 700 !important;
-  margin: 0 0 2px !important;
-  color: #1c1917 !important;
+  margin: 0 0 3px !important;
+  color: #111827 !important;
   letter-spacing: -0.02em !important;
 }
 
 .overview-container .page-heading .heading-description {
-  font-size: 13px !important;
-  color: #78716c !important;
-  line-height: 1.35 !important;
+  font-size: 13.5px !important;
+  color: #6b7280 !important;
+  line-height: 1.4 !important;
 }
 
 .overview-grid {

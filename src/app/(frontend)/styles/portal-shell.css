@@ -660,39 +660,53 @@
 }
 
 .nav-inner {
-  height: 44px !important;
-  overflow-x: hidden !important;
+  height: 48px !important;
+  overflow-x: auto !important;
   overflow-y: hidden !important;
-  justify-content: center !important;
-  gap: clamp(10px, 1.8vw, 24px) !important;
-  padding: 0 16px !important;
+  justify-content: flex-start !important;
+  gap: 28px !important;
+  padding: 0 36px !important;
+  max-width: 1480px !important;
+  margin: 0 auto !important;
 }
 
 .nav-item-btn {
-  height: 52px !important;
-  font-size: 14.5px !important;
-  font-weight: 600 !important;
-  padding: 0 14px !important;
-  gap: 9px !important;
+  height: 48px !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  color: #475569 !important;
+  padding: 0 4px !important;
+  gap: 8px !important;
   white-space: nowrap !important;
-  flex: 0 1 auto !important;
+  flex: 0 0 auto !important;
   border-bottom: 2.5px solid transparent !important;
+  border-radius: 0 !important;
+}
+
+.nav-item-btn svg {
+  color: #64748b !important;
 }
 
 .nav-item-btn:hover {
-  color: #1e293b !important;
-  background: rgba(0, 0, 0, 0.03) !important;
+  color: #0f172a !important;
+  background: transparent !important;
+}
+
+.nav-item-btn:hover svg {
+  color: #0f172a !important;
 }
 
 .nav-item-btn.active {
   color: #2563eb !important;
-  border-bottom-color: #2563eb !important;
-  font-weight: 700 !important;
+  border-bottom-color: #1d4ed8 !important;
+  font-weight: 600 !important;
+  background: transparent !important;
 }
 
 .nav-item-btn.active svg {
-  color: #2563eb !important;
+  color: #d97706 !important; /* Orange/amber icon for active Academic Overview */
 }
+
 
 
 .portal-breadcrumb-ribbon {
