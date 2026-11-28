@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import PageHeading from "../components/common/PageHeading";
+import { findStudentById } from "../services/studentData";
 import { ArrowLeft, Check, Info } from "lucide-react";
 
-export default function ClusterSelection({ cluster, setCluster, goTo }) {
+export default function ClusterSelection({ studentId, cluster, setCluster, goTo }) {
   const [pending, setPending] = useState(cluster || "Cluster 2");
+  const student = useMemo(() => findStudentById(studentId), [studentId]);
+  const specialization = student?.specialization && student.specialization.trim()
+    ? student.specialization
+    : "Data Science And Big Data Analytics";
 
   const clusters = [
+
     {
       id: "Cluster 1",
       name: "Cluster 1",
@@ -39,7 +45,7 @@ export default function ClusterSelection({ cluster, setCluster, goTo }) {
         <span className="specialization-tag">
           Your Specialization
         </span>
-        <strong>Generative AI for Agentic and Multi-Modal Intelligence</strong>
+        <strong>{specialization}</strong>
       </section>
 
       <div className="cluster-grid">

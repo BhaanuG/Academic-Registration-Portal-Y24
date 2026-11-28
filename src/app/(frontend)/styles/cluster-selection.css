@@ -77,43 +77,44 @@
   margin-top: 2px !important;
 }
 
-/* Specialization Banner */
+/* Specialization Banner - Matching exact reference design */
 .specialization-banner {
   flex: 0 0 auto !important;
-  margin-top: 2px;
-  padding: 8px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border: 1.5px solid #ebdcc5;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
+  margin-top: 4px;
+  padding: 16px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  border: 1px solid #dbeafe !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.05) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
 }
 
 .specialization-tag {
-  display: inline-block;
-  color: #92400e;
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  background: #fefce8;
-  border: 1px solid #fde68a;
-  padding: 3px 9px;
-  border-radius: 6px;
-  flex-shrink: 0;
+  display: inline-block !important;
+  color: #0284c7 !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 .specialization-banner strong {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #1c1917;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  color: #0f172a !important;
+  letter-spacing: -0.01em !important;
 }
+
 
 /* Cluster Grid & Selection Cards (Expanded to fill available height like overview cards) */
 .cluster-grid {
