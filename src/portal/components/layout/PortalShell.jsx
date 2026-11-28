@@ -90,8 +90,8 @@ export default function PortalShell({ page, setPage, onLogout, studentId, childr
                   setMobileMenuOpen(false);
                 }}
               >
-                <Icon size={16} className={isActive ? "text-blue-600" : "text-slate-400"} />
-                <span>{label}</span>
+                <Icon size={18} className={isActive ? "text-blue-600" : "text-slate-500"} />
+                <span className="tracking-tight">{label}</span>
                 {badge && <span className={`nav-item-badge ${isActive ? "active-badge" : ""}`}>{badge}</span>}
               </button>
             );
