@@ -12,7 +12,7 @@
   flex: 1 1 0% !important;
   display: flex !important;
   flex-direction: column !important;
-  padding: 24px 36px 24px !important;
+  padding: 16px 36px 14px !important;
   min-height: 0 !important;
 }
 
@@ -29,36 +29,37 @@
   margin: 0 auto;
   display: flex !important;
   flex-direction: column !important;
-  gap: 20px !important;
+  gap: 14px !important;
 }
 
 .overview-container .page-heading {
-  margin-bottom: 4px !important;
+  margin-bottom: 2px !important;
   padding-bottom: 0px !important;
   border-bottom: none !important;
 }
 
 .overview-container .page-heading h1 {
   font-family: Georgia, serif !important;
-  font-size: 24px !important;
+  font-size: 22px !important;
   font-weight: 700 !important;
-  margin: 0 0 4px !important;
+  margin: 0 0 2px !important;
   color: #0f172a !important;
   letter-spacing: -0.02em !important;
 }
 
 .overview-container .page-heading .heading-description {
-  font-size: 13.5px !important;
+  font-size: 13px !important;
   color: #64748b !important;
-  line-height: 1.4 !important;
+  line-height: 1.35 !important;
 }
 
 .overview-grid {
   display: grid !important;
   grid-template-columns: minmax(0, 1.4fr) minmax(360px, 0.95fr) !important;
-  gap: 20px !important;
+  gap: 16px !important;
   align-items: stretch !important;
 }
+
 
 .overview-main-col {
   display: flex !important;
@@ -165,7 +166,7 @@
 
 /* Prescribed Curriculum Status Section */
 .curriculum-status-section {
-  padding: 24px 28px !important;
+  padding: 16px 24px !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 12px !important;
   background: #ffffff !important;
@@ -173,12 +174,12 @@
 }
 
 .curriculum-status-section .section-title {
-  margin-bottom: 18px !important;
+  margin-bottom: 12px !important;
 }
 
 .curriculum-status-section .section-title h2 {
   font-family: Georgia, serif !important;
-  font-size: 18px !important;
+  font-size: 17px !important;
   font-weight: 700 !important;
   color: #0f172a !important;
   margin: 0 !important;
@@ -187,14 +188,14 @@
 .curriculum-metrics-grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 16px !important;
+  gap: 14px !important;
 }
 
 .curriculum-metrics-grid .metric-box {
   background: #f8fafc !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 8px !important;
-  padding: 16px 20px !important;
+  padding: 12px 16px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -203,17 +204,18 @@
 }
 
 .metric-box .metric-title {
-  font-size: 11px !important;
+  font-size: 10.5px !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
+  letter-spacing: 0.05em !important;
   color: #64748b !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 4px !important;
 }
 
 .metric-box .metric-number {
-  font-size: 28px !important;
+  font-size: 24px !important;
   font-weight: 800 !important;
   line-height: 1 !important;
 }
+
 
