@@ -87,7 +87,7 @@ export default function Admin() {
               id: "student-1",
               name: "Anirudh Varma",
               username: "2400030952",
-              dateOfBirth: "2005-04-18",
+              dateOfBirth: "2007-01-01",
               universityEmail: "2400030952@kluniversity.in",
               personalEmail: "anirudh.varma@gmail.com",
               mobileNumber: "9876543210",

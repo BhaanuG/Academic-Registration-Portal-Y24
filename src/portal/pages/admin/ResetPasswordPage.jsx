@@ -55,10 +55,10 @@ export default function AdminResetPasswordPage() {
         email: found.universityEmail || `${found.username}@kluniversity.in`,
         department: "Computer Science & Engineering",
         cluster: found.cluster || "Cluster 2",
-        dateOfBirth: found.dateOfBirth || "2005-04-18",
+        dateOfBirth: found.dateOfBirth || "2007-01-01",
         counselor: found.counselor?.name || "Dr. S. Srinivasa Rao",
       });
-      setDobPassword(found.dateOfBirth || "2005-04-18");
+      setDobPassword(found.dateOfBirth || "2007-01-01");
       setIsSearching(false);
     } else {
       // Check local storage records or default student record
@@ -73,7 +73,7 @@ export default function AdminResetPasswordPage() {
           name: "Anirudh Varma",
           universityEmail: "2400030952@kluniversity.in",
           cluster: "Cluster 2",
-          dateOfBirth: "2005-04-18",
+          dateOfBirth: "2007-01-01",
         };
         setMatchedAccount({
           id: studentRecord.id || studentRecord.username,
@@ -83,10 +83,10 @@ export default function AdminResetPasswordPage() {
           email: studentRecord.universityEmail || `${studentRecord.username}@kluniversity.in`,
           department: "Computer Science & Engineering",
           cluster: studentRecord.cluster || "Cluster 2",
-          dateOfBirth: studentRecord.dateOfBirth || "2005-04-18",
+          dateOfBirth: studentRecord.dateOfBirth || "2007-01-01",
           counselor: "Dr. S. Srinivasa Rao",
         });
-        setDobPassword(studentRecord.dateOfBirth || "2005-04-18");
+        setDobPassword(studentRecord.dateOfBirth || "2007-01-01");
       } else {
         setMatchedAccount(null);
         setNotFound(true);

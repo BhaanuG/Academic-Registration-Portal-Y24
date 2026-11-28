@@ -3,6 +3,12 @@ import DatePicker from "../components/common/DatePicker";
 import PageHeading from "../components/common/PageHeading";
 import PasswordInput from "../components/common/PasswordInput";
 import { passwordsMatch } from "../utils/validation";
+import {
+  setStudentCustomPassword,
+  getStudentCustomPassword,
+  getStudentDateOfBirth,
+  DEFAULT_STUDENT_DOB,
+} from "../services/authService";
 import { Check, CheckCircle2, Lock, Shield, User, KeyRound, AlertCircle, Edit3 } from "lucide-react";
 
 export default function Profile({ studentId }) {
@@ -17,7 +23,7 @@ export default function Profile({ studentId }) {
     batch: "2024-2028",
     term: "Third Year · Semester 5",
     gender: "Male",
-    dateOfBirth: "2005-04-18",
+    dateOfBirth: "2007-01-01",
     aadhaarNumber: "1234 5678 9012",
     apaarNumber: "APAAR-9876-5432",
     residencyStatus: "Hosteler",
@@ -208,18 +214,42 @@ export default function Profile({ studentId }) {
               className="security-form"
               onSubmit={async (e) => {
                 e.preventDefault();
+                const existingPwd = getStudentCustomPassword(studentId);
+                const defaultDob = getStudentDateOfBirth(studentId) || DEFAULT_STUDENT_DOB;
+                
+                // Validate current password (accept either previous custom password or registered DOB)
+                if (existingPwd && currentPassword !== existingPwd) {
+                  setPasswordStatus("error");
+                  setPasswordMessage("Current password entered is incorrect.");
+                  return;
+                } else if (!existingPwd && currentPassword !== defaultDob && currentPassword !== "2007-01-01" && currentPassword !== "01-01-2007") {
+                  setPasswordStatus("error");
+                  setPasswordMessage("Current credential does not match your registered Date of Birth.");
+                  return;
+                }
+
                 if (!passwordsMatch(newPassword, confirmPassword)) {
                   setPasswordStatus("error");
                   setPasswordMessage("New passwords do not match.");
                   return;
                 }
+                
+                if (newPassword.length < 8) {
+                  setPasswordStatus("error");
+                  setPasswordMessage("New password must be at least 8 characters.");
+                  return;
+                }
+
+                // Save custom password to persistent storage
+                setStudentCustomPassword(studentId, newPassword);
+
                 setCurrentPassword("");
                 setCurrentDob("");
                 setNewPassword("");
                 setConfirmPassword("");
                 setPasswordStatus("success");
                 setPasswordMessage(
-                  "Demonstration mode: Password change simulated. (Real password changes require institutional directory service integration).",
+                  "Password updated successfully! Next time you sign in, you can enter your new password directly.",
                 );
               }}
             >

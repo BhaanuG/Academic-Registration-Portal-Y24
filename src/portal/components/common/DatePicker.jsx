@@ -37,7 +37,7 @@ function formatDate(value) {
 export default function DatePicker({ value, onChange, label = "Date of birth" }) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const initial = dateFromValue(value) || new Date(2005, 5, 18);
+  const initial = dateFromValue(value) || new Date(2007, 0, 1);
   const [open, setOpen] = useState(false);
   const [draftValue, setDraftValue] = useState(value || "");
   const [viewMonth, setViewMonth] = useState(initial.getMonth());
