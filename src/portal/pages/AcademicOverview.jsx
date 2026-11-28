@@ -67,15 +67,15 @@ export default function Overview({ studentId, goTo }) {
 
             <dl className="data-grid academic-grid">
               <div>
-                <dt>Student Name</dt>
+                <dt>STUDENT NAME</dt>
                 <dd>{student.name}</dd>
               </div>
               <div>
-                <dt>University Roll Number</dt>
+                <dt>UNIVERSITY ROLL NUMBER</dt>
                 <dd className="font-semibold text-slate-900">{student.username}</dd>
               </div>
               <div>
-                <dt>Institutional Email</dt>
+                <dt>INSTITUTIONAL EMAIL</dt>
                 <dd>
                   <a href={`mailto:${student.universityEmail}`} className="text-blue-600 hover:underline">
                     {student.universityEmail}
@@ -83,31 +83,31 @@ export default function Overview({ studentId, goTo }) {
                 </dd>
               </div>
               <div>
-                <dt>Department</dt>
-                <dd>CSE - Computer Science & Engineering</dd>
+                <dt>DEPARTMENT / PROGRAM</dt>
+                <dd>CSE · Computer Science &amp; Engineering</dd>
               </div>
               <div>
-                <dt>Academic Specialization</dt>
-                <dd>{student.specialization && student.specialization.trim() ? student.specialization : "—"}</dd>
+                <dt>ACADEMIC SPECIALIZATION</dt>
+                <dd>{student.specialization && student.specialization.trim() ? student.specialization : "Data Science And Big Data Analytics"}</dd>
               </div>
               <div>
-                <dt>Cohort Cluster</dt>
+                <dt>COHORT CLUSTER</dt>
                 <dd>{cluster.replace("Cluster ", "Cluster-")}</dd>
               </div>
               <div>
-                <dt>Student Type / Track</dt>
+                <dt>STUDENT TYPE / TRACK</dt>
                 <dd>CRT (CSE-2)</dd>
               </div>
               <div>
-                <dt>Gender</dt>
-                <dd>{student.gender || "Male"}</dd>
+                <dt>PLACEMENT READINESS STATUS</dt>
+                <dd className="text-slate-900 font-medium">Placed</dd>
               </div>
               <div>
-                <dt>Addon Degree Track</dt>
-                <dd>{student.specialization && student.specialization.trim() ? "Specialization" : "—"}</dd>
+                <dt>ADDON DEGREE TRACK</dt>
+                <dd>Specialization</dd>
               </div>
               <div>
-                <dt>Current Term Level</dt>
+                <dt>CURRENT TERM LEVEL</dt>
                 <dd>Third Year · Semester 6 (2026–27 EVEN)</dd>
               </div>
             </dl>
@@ -127,28 +127,28 @@ export default function Overview({ studentId, goTo }) {
 
           <dl className="counselor-grid">
             <div>
-              <dt>Employee ID</dt>
+              <dt>EMPLOYEE ID</dt>
               <dd className="font-semibold">{student.counselor?.employeeId || "6934"}</dd>
             </div>
             <div>
-              <dt>Designation</dt>
+              <dt>DESIGNATION</dt>
               <dd>{student.counselor?.designation || "Faculty Counselor"}</dd>
             </div>
             <div>
-              <dt>Department</dt>
-              <dd>Computer Science & Engineering</dd>
+              <dt>DEPARTMENT</dt>
+              <dd>Computer Science &amp; Engineering</dd>
             </div>
             <div>
-              <dt>Contact Mobile</dt>
+              <dt>CONTACT MOBILE</dt>
               <dd className="text-slate-800">
                 {student.counselor?.mobileNumber || "+91 998XX XX644"}
               </dd>
             </div>
             <div>
-              <dt>Contact Email</dt>
+              <dt>CONTACT EMAIL</dt>
               <dd>
-                <a href={`mailto:${student.counselor?.email}`} className="text-blue-600 hover:underline">
-                  {student.counselor?.email || "counselor@kluniversity.in"}
+                <a href={`mailto:${student.counselor?.email || "sabithakiran.ch@kluniversity.in"}`} className="text-blue-600 hover:underline">
+                  {student.counselor?.email || "sabithakiran.ch@kluniversity.in"}
                 </a>
               </dd>
             </div>
@@ -162,27 +162,27 @@ export default function Overview({ studentId, goTo }) {
           <h2>Prescribed Curriculum Status</h2>
         </div>
 
-        <div className="curriculum-metrics-grid">
-          <div className="metric-box">
-            <span className="metric-title">Curriculum Buckets</span>
-            <span className="metric-number text-blue-600">8</span>
-          </div>
+          <div className="curriculum-metrics-grid">
+            <div className="metric-box">
+              <span className="metric-title">CURRICULUM BUCKETS</span>
+              <span className="metric-number text-blue-600">8</span>
+            </div>
 
-          <div className="metric-box">
-            <span className="metric-title">Total Subjects</span>
-            <span className="metric-number text-emerald-600">10</span>
-          </div>
+            <div className="metric-box">
+              <span className="metric-title">TOTAL SUBJECTS</span>
+              <span className="metric-number text-emerald-600">10</span>
+            </div>
 
-          <div className="metric-box">
-            <span className="metric-title">Prescribed Credits</span>
-            <span className="metric-number text-purple-600">30</span>
-          </div>
+            <div className="metric-box">
+              <span className="metric-title">PRESCRIBED CREDITS</span>
+              <span className="metric-number text-purple-600">30</span>
+            </div>
 
-          <div className="metric-box">
-            <span className="metric-title">Electives Pending</span>
-            <span className="metric-number text-amber-500">5</span>
+            <div className="metric-box">
+              <span className="metric-title">ELECTIVES PENDING</span>
+              <span className="metric-number text-emerald-600">0</span>
+            </div>
           </div>
-        </div>
       </section>
     </div>
   );
