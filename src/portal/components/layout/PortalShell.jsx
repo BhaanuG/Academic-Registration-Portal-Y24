@@ -99,15 +99,6 @@ export default function PortalShell({ page, setPage, onLogout, studentId, childr
         </div>
       </nav>
 
-      {/* Active Breadcrumb Ribbon */}
-      <div className="portal-breadcrumb-ribbon">
-        <div className="breadcrumb-inner">
-          <span className="breadcrumb-root">Student Portal</span>
-          <ChevronRight size={13} className="text-slate-400" />
-          <span className="breadcrumb-current">{currentNav.label}</span>
-        </div>
-      </div>
-
       {/* Main Page Workspace */}
       <main className={`content page-${page}`}>
         <div className="page-transition" key={page}>
